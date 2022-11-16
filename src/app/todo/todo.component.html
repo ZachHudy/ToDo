@@ -13,8 +13,10 @@
                             <mat-icon matSuffix>add_circle_outline</mat-icon>
                             <mat-hint>Add Task</mat-hint>
                         </mat-form-field>
-                        <button (click)="addTask()" mat-raised-button [disabled]="todoForm.invalid"
-                            color="primary">Add</button>
+                        <button *ngIf="!isEditEnabled" (click)="addTask()" mat-raised-button
+                            [disabled]="todoForm.invalid" color="primary">Add</button>
+                        <button *ngIf="isEditEnabled" (click)="updateTask()" mat-raised-button
+                            [disabled]="todoForm.invalid" color="primary">Update</button>
                     </form>
                 </mat-card>
             </div>
@@ -29,7 +31,19 @@
 
                             <div cdkDropList [cdkDropListData]="tasks" class="example-list"
                                 (cdkDropListDropped)="drop($event)">
-                                <div class="example-box" *ngFor="let item of tasks" cdkDrag>{{item.description}}</div>
+                                <div class="example-box" *ngFor="let item of tasks; let i = index" cdkDrag>
+                                    {{item.description}}
+                                    <!-- Delete button -->
+                                    <div class="box">
+                                        <button mat-icon-button color="warn" (click)="deleteTask(i)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                        <!-- Edit button -->
+                                        <button mat-icon-button color="primary" (click)="onEdit(item, i)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -40,7 +54,11 @@
 
                             <div cdkDropList [cdkDropListData]="inprogress" class="example-list"
                                 (cdkDropListDropped)="drop($event)">
-                                <div class="example-box" *ngFor="let item of inprogress" cdkDrag>{{item.description}}
+                                <div class="example-box" *ngFor="let item of inprogress; let i = index" cdkDrag>
+                                    {{item.description}}
+                                    <button mat-icon-button color="warn" (click)="deleteInProgress(i)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
                                 </div>
                             </div>
                         </div>
