@@ -33,7 +33,14 @@
                                     {{item.description}}
                                     <!-- Delete button -->
                                     <div class="box">
-                                        <button mat-icon-button color="warn" (click)="deleteTask(i)"></button>
+                                        <button mat-icon-button color="warn" (click)="deleteTask(i)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div class="box">
+                                        <button mat-icon-button color="warn" (click)="deleteTask(i)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
