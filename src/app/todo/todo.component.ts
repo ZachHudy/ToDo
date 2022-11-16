@@ -31,7 +31,11 @@ export class TodoComponent implements OnInit {
   }
 
   deleteTask(i: number) {
-    this.tasks.splice(i, 1)
+    this.tasks.splice(i, 1);
+  }
+
+  deleteInProgress(i: number) {
+    this.inprogress.splice(i, 1);
   }
 
   drop(event: CdkDragDrop<TodoTask[]>) {
